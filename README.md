@@ -2,7 +2,7 @@
 
 CLVL is a command line tool to lookup verbs and verb conjugations without leaving your terminal.  
 
-CLVL comes with a data file for looking up Spanish verbs (data/jehle_verb_database.csv) but you can also user your own csv formatted file to lookup verbs in other languages.
+CLVL comes with a data file for looking up Spanish verbs (data/jehle_verb_database.csv) but you can also use your own csv formatted file to lookup verbs in other languages.
 
 ## Usage
 
