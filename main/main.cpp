@@ -202,9 +202,9 @@ struct forms_visitor : public boost::static_visitor<>
 
 int main(int argc, const char *argv[])
 {
-    	namespace io = boost::iostreams;
-        namespace fs = boost::filesystem;
-    	namespace x3 = boost::spirit::x3;
+   	namespace io = boost::iostreams;
+    namespace fs = boost::filesystem;
+   	namespace x3 = boost::spirit::x3;
 	namespace opt = boost::program_options;
 
   	try
@@ -216,26 +216,32 @@ Usage: clvl verb
 Search for a Spanish verb and return the conjugation in English.
 Buscar un verbo en español y devolver la conjugación en inglés.
 
-Example: clvl comer
+Example:  clvl comer
 Example2: clvl comer "Futuro perfecto"
-Example3: clvl comer "Futuro perfecto" --file ../data/my_conjugation_file.csv 
+Example3: clvl comer "Futuro perfecto" "Subjuntivo"
+Example4: clvl comer "Futuro perfecto" "Subjuntivo" --file data/my_conjugation_file.csv 
 OPTIONS)";
 		std::string file_desc = R"(
 A CSV formatted data file to parse. Defaults to ../data/jehle_verb_database.csv)";
+		std::string mood_desc = R"(
+The mood with which to conjugate the verb.  Defaults to 'Indicativo'.
+Moods are as follows:
+  "Indicativo"
+  "Subjuntivo"
+)";
 		std::string tense_desc = R"(
 The tense with which to conjugate the verb.  Defaults to 'Presente'.
 Tenses are as follows:
-"Presente"
-"Futuro"
-"Imperfecto"
-"Pretérito"
-"Condicional"
-"Presente perfecto"
-"Futuro perfecto"
-"Pluscuamperfecto"
-"Pretérito anterior"
-"Condicional perfecto"
-"Indicative"
+  "Presente"
+  "Futuro"
+  "Imperfecto"
+  "Pretérito"
+  "Condicional"
+  "Presente perfecto"
+  "Futuro perfecto"
+  "Pluscuamperfecto"
+  "Pretérito anterior"
+  "Condicional perfecto"
 
 )";
 		std::string verb_desc = R"(
@@ -246,11 +252,13 @@ A Spanish verb in infinitive form e.g. 'comer' to be conjugated.)";
       		("help,h", "Help screen")
       		("file,f", opt::value<std::string>()->default_value("../data/jehle_verb_database.csv"), file_desc.data())
       		("tense,t", opt::value<std::string>()->default_value("Presente"), tense_desc.data())
+      		("mood,m", opt::value<std::string>()->default_value("Indicativo"), mood_desc.data())
       		("verb,v", opt::value<std::string>()->required(), verb_desc.data());
 
 		opt::positional_options_description pos_desc;
 		pos_desc.add("verb",1);
-		pos_desc.add("tense",2);
+		pos_desc.add("tense",1);
+		pos_desc.add("mood",1);
 		opt::command_line_parser parser{argc, argv};
 		parser.options(desc).positional(pos_desc).allow_unregistered();
 		opt::parsed_options parsed_options = parser.run();
@@ -331,9 +339,10 @@ A Spanish verb in infinitive form e.g. 'comer' to be conjugated.)";
 
 		std::string const search_term = vm["verb"].as<std::string>();
 		std::string const tense = vm["tense"].as<std::string>();
+		std::string const mood = vm["mood"].as<std::string>();
 
-		auto pred = [s = search_term, t = tense](const clvl::ast::verb& v)
-				{ return (v.infinitive_.infinitive_spanish == s && v.tense_.tense_spanish == t); };
+		auto pred = [s = search_term, t = tense, m = mood](const clvl::ast::verb& v)
+				{ return (v.infinitive_.infinitive_spanish == s && v.tense_.tense_spanish == t && v.mood_.mood_spanish == m); };
 
 		auto it = std::find_if(result.begin(), result.end()
 				, pred);
