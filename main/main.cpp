@@ -4,7 +4,6 @@
 #include <boost/spirit/home/x3/support/utility/error_reporting.hpp>
 #include <boost/spirit/home/x3/support/utility/annotate_on_success.hpp>
 #include <boost/iostreams/device/mapped_file.hpp>
-#include <boost/fusion/adapted/std_pair.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/variant.hpp>
 #include <boost/format.hpp>

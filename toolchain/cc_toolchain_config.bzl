@@ -18,35 +18,35 @@ def _imp(ctx):
     tool_paths = [
         tool_path(
             name = "gcc",
-            path = "/usr/bin/clang-13"
+            path = "/usr/bin/clang++-13"
         ),
         tool_path(
            name = "ld",
            path = "/usr/bin/ld",
         ),
         tool_path(
-           name = "ar",
-           path = "/bin/false",
-        ),
-        tool_path(
            name = "cpp",
-           path = "/bin/false",
-        ),
-        tool_path(
-           name = "gcov",
-           path = "/bin/false",
+           path = "/usr/bin/clang++-13",
         ),
         tool_path(
            name = "nm",
-           path = "/bin/false",
+           path = "/usr/bin/nm",
         ),
         tool_path(
-           name = "objdump",
-           path = "/bin/false",
+           name = "ar",
+           path = "/usr/bin/ar",
+        ),
+        tool_path(
+           name = "gcov",
+           path = "/usr/bin/gcov",
         ),
         tool_path(
            name = "strip",
-           path = "/bin/false",
+           path = "/usr/bin/strip",
+        ),
+        tool_path(
+           name = "objdump",
+           path = "/usr/bin/objdump",
         ),
     ]
 
@@ -60,7 +60,6 @@ def _imp(ctx):
                     flag_groups = ([
                         flag_group(
                             flags = [
-                                "-lboost_",
                                 "-lboost_filesystem", 
                                 "-lboost_iostreams", 
                                 "-lboost_program_options", 
