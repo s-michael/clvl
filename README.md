@@ -121,7 +121,7 @@ Compile the project:
 ```
 cd clvl
 mkdir bin
-cd src
+cd main
 
 clang++-12 -O2 -Wall  main.cpp -o ../bin/clvl.out -lboost_iostreams -lboost_filesystem -lboost_program_options 
 ```
