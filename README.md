@@ -69,12 +69,11 @@ OPTIONS:
 
 ## Installation
 
-
 ### Ubuntu  
 
 Given the following platform:
 
-```
+```shell
 Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1020-aws x86_64)
 
 uname -a
@@ -90,53 +89,68 @@ Install pre-requisite packages:
 
 Install g++ and supporting tools:
 
-```
+```shell
 sudo apt-get install build-essential
 ```
 
 Install clang:
 
-```
+```shell
 sudo apt-get install clang-12
 ```
 
 Install boost libraries:
 
-```
+```shell
 sudo apt-get install libboost-all-dev
-```
-
-#### Clone
-
-Clone the project:
-
-```
-git clone https://github.com/s-michael/clvl.git
 ```
 
 #### Build
 
-Compile the project:
+##### Clang
 
-```
+###### Clone and compile the project:
+
+```shell
+git clone https://github.com/s-michael/clvl.git
 cd clvl
 mkdir bin
-cd src
+cd main
 
-clang++-12 -O2 -Wall  main.cpp -o ../bin/clvl.out -lboost_iostreams -lboost_filesystem -lboost_program_options 
+clang++-12 -O2 -Wall  main.cpp -o ../bin/clvl -lboost_iostreams -lboost_filesystem -lboost_program_options 
 ```
  
-### Test
+###### Run
 
-```
+```shell
 cd ../bin
 
-./clvl.out comer
+./clvl comer
 
 ```
 
-### Symlink
+###### Symlink
 
+```shell
+sudo ln -s clvl ../usr/bin/clvl
 ```
-ln -s clvl.out clvl
+
+##### Bazel
+
+clvl can be build with [Bazel](https://bazel.build/).
+[Install Bazel](https://docs.bazel.build/versions/main/install.html)
+
+###### Clone and build the project:
+
+```shell
+git clone https://github.com/s-michael/clvl.git
+bazel build --config=clang_config  //main:clvl
 ```
+
+###### Run
+
+```shell
+./bazel-bin/main/clvl comer Futuro Subjuntivo -f data/jehle_verb_database.csv
+```
+__Note__: Bazel will pull in dependencies (the boost libraries). 
+
