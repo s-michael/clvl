@@ -18,7 +18,7 @@ def _imp(ctx):
     tool_paths = [
         tool_path(
             name = "gcc",
-            path = "/usr/bin/clang++-13"
+            path = "/usr/bin/clang++"
         ),
         tool_path(
            name = "ld",
@@ -26,7 +26,7 @@ def _imp(ctx):
         ),
         tool_path(
            name = "cpp",
-           path = "/usr/bin/clang++-13",
+           path = "/usr/bin/clang++",
         ),
         tool_path(
            name = "nm",
@@ -76,7 +76,7 @@ def _imp(ctx):
         ctx = ctx,
         features = features,
         cxx_builtin_include_directories = [
-            "/usr/lib/llvm-13/lib/clang/13.0.1/include",
+            "/usr/lib/llvm-14/lib/clang/14.0.0/include",
             "/usr/include",
         ],
         toolchain_identifier = "local",
