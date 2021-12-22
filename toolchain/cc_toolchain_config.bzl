@@ -79,7 +79,9 @@ def _imp(ctx):
         features = features,
         cxx_builtin_include_directories = [
             "/usr/local/lib64/clang/14.0.0/include",
+            "/usr/local/lib/clang/14.0.0/include",
             "/usr/include",
+            "/usr/local/include",
         ],
         toolchain_identifier = "local",
         host_system_name = "local",
