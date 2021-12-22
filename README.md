@@ -84,7 +84,7 @@ Linux 5.11.0-1020-aws #21~20.04.2-Ubuntu SMP Fri Oct 1 13:03:59 UTC 2021 x86_64 
 
 Install pre-requisite packages:
 - build-essentials (g++)
-- clang-12
+- clang-14
 - libbboost-all-dev
 
 Install g++ and supporting tools:
@@ -96,7 +96,7 @@ sudo apt-get install build-essential
 Install clang:
 
 ```shell
-sudo apt-get install clang-12
+sudo apt-get install clang-14
 ```
 
 Install boost libraries:
@@ -117,7 +117,7 @@ cd clvl
 mkdir bin
 cd main
 
-clang++-12 -O2 -Wall  main.cpp -o ../bin/clvl -lboost_iostreams -lboost_filesystem -lboost_program_options 
+clang++-14 -O2 -Wall  main.cpp -o ../bin/clvl -lboost_iostreams -lboost_filesystem -lboost_program_options 
 ```
  
 ###### Run
@@ -140,10 +140,14 @@ sudo ln -s clvl ../usr/bin/clvl
 clvl can be build with [Bazel](https://bazel.build/).
 [Install Bazel](https://docs.bazel.build/versions/main/install.html)
 
+__Note__: the toolchain/cc_toolchain_config.bzl file may need to be updated to reflect your system's build tools and locations.
+__todo__: make the toolchain info less static
+
 ###### Clone and build the project:
 
 ```shell
 git clone https://github.com/s-michael/clvl.git
+cd clvl
 bazel build --config=clang_config  //main:clvl
 ```
 
