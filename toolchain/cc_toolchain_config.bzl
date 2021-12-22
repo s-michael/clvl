@@ -18,7 +18,7 @@ def _imp(ctx):
     tool_paths = [
         tool_path(
             name = "gcc",
-            path = "/usr/bin/clang++-13"
+            path = "/usr/local/bin/clang",
         ),
         tool_path(
            name = "ld",
@@ -26,7 +26,7 @@ def _imp(ctx):
         ),
         tool_path(
            name = "cpp",
-           path = "/usr/bin/clang++-13",
+           path = "/usr/local/bin/clang++",
         ),
         tool_path(
            name = "nm",
@@ -60,6 +60,8 @@ def _imp(ctx):
                     flag_groups = ([
                         flag_group(
                             flags = [
+                                "-fuse-ld=gold", 
+                                "-lstdc++", 
                                 "-lboost_filesystem", 
                                 "-lboost_iostreams", 
                                 "-lboost_program_options", 
@@ -76,7 +78,7 @@ def _imp(ctx):
         ctx = ctx,
         features = features,
         cxx_builtin_include_directories = [
-            "/usr/lib/llvm-13/lib/clang/13.0.1/include",
+            "/usr/local/lib64/clang/14.0.0/include",
             "/usr/include",
         ],
         toolchain_identifier = "local",
@@ -84,7 +86,7 @@ def _imp(ctx):
         target_system_name = "local",
         target_cpu = "k8",
         target_libc = "unknown",
-        compiler = "clang",
+        compiler = "clang++",
         abi_version = "unknown",
         abi_libc_version = "unknown",
         tool_paths = tool_paths,
