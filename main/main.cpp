@@ -203,7 +203,7 @@ struct forms_visitor : public boost::static_visitor<>
 int main(int argc, const char *argv[])
 {
    	namespace io = boost::iostreams;
-    namespace fs = boost::filesystem;
+        namespace fs = boost::filesystem;
    	namespace x3 = boost::spirit::x3;
 	namespace opt = boost::program_options;
 
@@ -331,11 +331,9 @@ A Spanish verb in infinitive form e.g. 'comer' to be conjugated.)";
 
 		boost::iostreams::mapped_file mmap(file, boost::iostreams::mapped_file::readonly);
 
-		std::vector<clvl::ast::verb> result;
-
 		position_cache positions{mmap.begin(), mmap.end()};
 
-		result = parse(mmap, positions);
+                std::vector<clvl::ast::verb> result = parse(mmap, positions);
 
 		std::string const search_term = vm["verb"].as<std::string>();
 		std::string const tense = vm["tense"].as<std::string>();
