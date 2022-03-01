@@ -63,17 +63,17 @@ namespace clvl
 	struct pastparticiple_class;
 	struct verb_class;
 
-	x3::rule<quoted_string_class, std::string> const quoted_string = "quoted_string";
-	x3::rule<infinitive_class, ast::infinitive>  const infinitive = "infinitive";
-	x3::rule<mood_class, ast::mood>  const mood = "mood";
-	x3::rule<verb_class, ast::verb> const verb = "verb";
-	x3::rule<tense_class, ast::tense>  const tense = "tense";
-	x3::rule<verb_english_class, ast::verb_english> const verb_english = "verb_english";
-	x3::rule<form_class, ast::form> const form = "form";
-	x3::rule<alt_form_class, ast::alt_form> const alt_form = "alt_form";
-	x3::rule<alt_form2_class, ast::alt_form2> const alt_form2 = "alt_form2";
-	x3::rule<gerund_class, ast::gerund> const gerund = "gerund";
-	x3::rule<pastparticiple_class, ast::pastparticiple> const pastparticiple = "pastparticiple";
+	x3::rule<quoted_string_class, std::string> static constexpr quoted_string = "quoted_string";
+	x3::rule<infinitive_class, ast::infinitive>  static constexpr infinitive = "infinitive";
+	x3::rule<mood_class, ast::mood>  static constexpr mood = "mood";
+	x3::rule<verb_class, ast::verb> static constexpr verb = "verb";
+	x3::rule<tense_class, ast::tense>  static constexpr tense = "tense";
+	x3::rule<verb_english_class, ast::verb_english> static constexpr verb_english = "verb_english";
+	x3::rule<form_class, ast::form> static constexpr form = "form";
+	x3::rule<alt_form_class, ast::alt_form> static constexpr alt_form = "alt_form";
+	x3::rule<alt_form2_class, ast::alt_form2> static constexpr alt_form2 = "alt_form2";
+	x3::rule<gerund_class, ast::gerund> static constexpr gerund = "gerund";
+	x3::rule<pastparticiple_class, ast::pastparticiple> static constexpr pastparticiple = "pastparticiple";
 
 	auto const quoted_string_def =  lexeme['"' >> +(char_ - '"') >> '"']; 
 	auto const quoted_empty  = lexeme[lit('"') > lit('"')];
@@ -129,23 +129,23 @@ using position_cache = boost::spirit::x3::position_cache<std::vector<iterator_ty
 std::vector<clvl::ast::verb>
 parse(boost::iostreams::mapped_file mmap, position_cache& positions)
 {
-    	namespace spirit = boost::spirit;
-    	namespace x3 = spirit::x3;
+   	namespace spirit = boost::spirit;
+   	namespace x3 = spirit::x3;
 
-    	using x3::ascii::space;
+   	using x3::ascii::space;
 	using x3::with;
 	using x3::lexeme;
 	using x3::char_;
 	using x3::string;
 	using x3::lit;
 
-    	iterator_type iter = mmap.const_data();
-    	iterator_type const end = mmap.const_data() + mmap.size();
+   	iterator_type iter = mmap.const_data();
+   	iterator_type const end = mmap.const_data() + mmap.size();
 	std::vector<clvl::ast::verb> ast;
-    	using clvl::parser::verbs;
-    	using clvl::parser::position_cache_tag;
-	using boost::spirit::x3::error_handler_tag;
-    	using error_handler_type = boost::spirit::x3::error_handler<iterator_type>;
+   	using clvl::parser::verbs;
+   	using clvl::parser::position_cache_tag;
+    using boost::spirit::x3::error_handler_tag;
+   	using error_handler_type = boost::spirit::x3::error_handler<iterator_type>;
 
     	error_handler_type error_handler(iter, end, std::cerr);
 
