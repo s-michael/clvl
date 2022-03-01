@@ -138,9 +138,11 @@ sudo ln -s clvl ../usr/bin/clvl
 ##### Bazel
 
 clvl can be build with [Bazel](https://bazel.build/).
+
 [Install Bazel](https://docs.bazel.build/versions/main/install.html)
 
 __Note__: the toolchain/cc_toolchain_config.bzl file may need to be updated to reflect your system's build tools and locations.
+
 __todo__: make the toolchain info less static
 
 ###### Clone and build the project:
