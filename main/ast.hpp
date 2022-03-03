@@ -122,7 +122,7 @@ namespace clvl { namespace ast
         mood mood_;
         tense tense_;
         verb_english verb_english_;
-	forms forms_;
+	    forms forms_;
         gerund gerund_;
         pastparticiple pastparticiple_;
     };
